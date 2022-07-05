@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.predictor-head{
+    background-color: #f3f3f3;
+    height: 35vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 7vh 0vw 0vh 7vw;
+    padding: 3vh 3vw 3vh 3vw;
+    border-radius: 20px;
+
+}
+.head-text{
+    /* font-weight: 700; */
+    /* font-size: 4vh; */
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.head-text h2{
+    font-weight: 700;
+    font-size: 6vh;
+    color: #ff3535;
+}
+.head-text p{
+    font-weight: 600;
+    font-size: 3.5vh;
+    color: #aaaaaa;
+    margin-top: 2vh;
+}
+.head-contact{
+    width: 100%;
+}
+.head-contact img{
+    height: 5vh;
+    margin-right: 2vw;
+}
+.head-contact p{
+    color: #787878;
+    font-size: 2.5vh;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+}
+.head-image img{
+    height: 100%;
+    width: 100%;
+}
+
+.fields{
+    font-weight: 600;
+    color: #787878;
+    font-size: 3vh;
+    width: 70vw;
+    margin: 5vh 0 0 10.5vw;
+}
+
+.fields-1 p{
+    font-weight: 600;
+    font-size: 3vh;
+    color: #787878;
+}
+.fields-1 input{
+    height: 7vh;
+    width: 88%;
+    margin-top: 1vh;
+    margin-bottom: 4vh;
+    background-color: #f3f3f3;
+    border: 0px;
+    border-radius: 8px;
+    padding-left: 1.5vw;
+    font-weight: 500;
+    font-size: 2.5vh;
+}
+.fields-1 input::placeholder{
+    color: #aaaaaa
+}
+
+.fields-2 select{
+    height: 7vh;
+    width: 90%;
+    margin-top: 1vh;
+    margin-bottom: 4vh;
+    padding-left: 1vw;
+    background-color: #f3f3f3;  
+    border-color: #f3f3f3;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 2.5vh;
+    color: #aaaaaa;
+    transition: all 0.5s;
+}
+
+.field-big{
+    width: 90%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.field-big label{
+    background-color: #f3f3f3;
+    display: inline-block;
+    width: 9vw;
+    font-weight: 500;
+    font-size: 2.5vh;
+    color: #aaaaaa;
+    border-radius: 3px;
+    border: solid 3px #f3f3f3;
+    transition: all 0.3s;
+    margin-top: 1vh;
+    margin-bottom: 4vh; 
+    text-align: center;
+    padding: 1vh;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.yes{
+    margin-right: 1vw;
+}
+.no{
+    margin-left: 1vw;
+}
+
+.field-big input[type="radio"]{
+    cursor: pointer;
+    display: none;
+}
+.field-big input[type="radio"]:checked + label{
+    border: solid 3px #ff3535;
+}
+
+.button{
+    width: 87%;
+    height: 7vh;
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.button input{
+    width: 7vw;
+    background-color: #ff3535;
+    border-radius: 12px;
+    border: 0px;
+    font-weight: 600;
+    font-size: 3vh;
+    color: #f3f3f3;
+    cursor: pointer;
+}
+
+.prediction{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #f3f3f3;
+    height: 85vh;
+    width: 75vw;  
+    margin: 5vh 10vw 5vh 10vw; 
+    border-radius: 32px; 
+}
+.prediction-text{
+    /* background-color: #ff3535; */
+    margin-top: 5vh;
+    margin-left: 5vw;
+    display: flex;
+    flex-direction: column;
+    /* align-items:stretch;   */
+    font-weight: 600;
+    font-size: 3.5vh;
+    color: #787878;
+
+}
+.prediction-text h2{
+    font-weight: 600;
+    font-size: 10vh;
+    color: #ff3535;
+}
+.advice{
+    margin-top: 2vh;
+    font-weight: 500;
+    font-size: 3vh;
+}
+.advice li{
+    margin-left: 1.5vw;
+}
+.prediction-contact{
+    margin-top: 4vh;
+    font-weight: 600;
+    font-size: 2.5vh;
+    color: #787878;
+}
+.prediction-contact img{
+    height: 5vh;
+    margin-right: 2vw;
+}
+.prediction-contact p{
+    color: #787878;
+    font-size: 2.5vh;
+    /* margin-top: 3vh; */
+    margin-bottom: 1vh;
+}
+.prediction-img img{
+    height: 100%;
+    margin-right: 0;
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HeartHealthChecker</title>
+    <!-- <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"> -->
+    <link type="text/css" rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="whole">
+        <div class="predictor-head">
+            <div class="head-text">
+                <div>
+                    <h2>HEART DISEASE PREDICTOR</h2>
+                    <p>Worried about your Heart Health? Use this app to help you diagnose it!</p>
+                </div>
+                <div class="head-contact">
+                    <p>Connect with me-</p>
+                    <a  href="https://github.com/Traplekumar?tab=repositories" target="_blank"><img src="../static/images/Githhub.png"></a>
+                    <a href="https://www.linkedin.com/in/traple-kumar-07967a196" target="_blank"><img src="../static/images/LinkedIn.png"></a>
+                </div>
+            </div>
+            <div class="head-image">
+                <img src="../static/images/predictor_head_img.png">
+            </div>
+        </div>
+        <form action="#" method="POST">
+            <div class="fields">
+                <div class="fields-1">
+                    <p>BMI</p>
+                    <input type="text" placeholder="BMI....", name="bmi" required>
+                    <p>Sleep Time</p>
+                    <input type="text" placeholder="Sleep Time....", name="sleep" required>
+                    <p>Physical Health</p>
+                    <input type="text" placeholder="Physical Health...." name="physical_health" required>
+                    <p>Mental Health</p>
+                    <input type="text" placeholder="Mental Health...." name="mental_health" required>
+                </div>
+                <div class="fields-2">
+                    <p>Race</p>
+                    <select name="race" required>
+                        <option value="" disabled selected hidden>American, Asian....</option>
+                        <option value="White">White</option>
+                        <option value="Black">Black</option>
+                        <option value="Asian">Asian</option>
+                        <option value="American">American</option>
+                        <option value="American Indian/Alaskan Native">American Indian/Alaskan Native</option>
+                    </select>
+                    <p>Sex</p>
+                    <select name="sex" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <p>Age Category</p>
+                    <select name="age_category" required>
+                        <option value="18-24">18-24</option>
+                        <option value="25-29">25-29</option>
+                        <option value="30-34">30-34</option>
+                        <option value="35-39">35-39</option>
+                        <option value="40-44">40-44</option>
+                        <option value="45-49">45-49</option>
+                        <option value="50-54">50-54</option>
+                        <option value="55-59">55-59</option>
+                        <option value="60-64">60-64</option>
+                        <option value="65-69">65-69</option>
+                        <option value="70-74">70-74</option>
+                        <option value="75-79">75-79</option>
+                        <option value="80 or older">80+</option>
+                    </select>
+                    <p>Diabetic</p>
+                    <select name="diabetic" required>
+                        <option value="No">No</option>
+                        <option value="No, borderline diabetes">No, borderline diabetes</option>
+                        <option value="Yes (during pregnancy)">Yes, during pregnancy</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                    <p>General Health</p>
+                    <select name="general_health" required>
+                        <option value="Excellent">Excellent</option>
+                        <option value="Very good">Very Good</option>
+                        <option value="Good">Good</option>
+                        <option value="Fair">Fair</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+                </div>
+                <div class="fields-3">
+                    <div class="field-big">
+                        <div>
+                            <p>Smoking</p>
+                            <input type="radio" id="y_smoking" name="smoking" value="yes" required>
+                            <label for="y_smoking" class="yes">Yes</label>
+                            <input type="radio" id="n_smoking" name="smoking" value="no" required>
+                            <label for="n_smoking" class="no">No</label>
+                        </div>
+                        <div>
+                            <p>Alcohol Drinking</p>
+                            <input type="radio" id="y_alcohol" name="alcohol" value="yes" required>
+                            <label for="y_alcohol" class="yes">Yes</label>
+                            <input type="radio" id="n_alcohol" name="alcohol" value="no" required>
+                            <label for="n_alcohol" class="no">No</label>
+                        </div>
+                    </div>
+                    <div class="field-big">
+                        <div>
+                            <p>Stroke</p>
+                            <input type="radio" id="y_stroke" name="stroke" value="yes" required>
+                            <label for="y_stroke" class="yes">Yes</label>
+                            <input type="radio" id="n_stroke" name="stroke" value="no" required>
+                            <label for="n_stroke" class="no">No</label>
+                        </div>
+                        <div>
+                            <p>Asthma</p>
+                            <input type="radio" id="y_asthma" name="asthma" value="yes" required>
+                            <label for="y_asthma" class="yes">Yes</label>
+                            <input type="radio" id="n_asthma" name="asthma" value="no" required>
+                            <label for="n_asthma" class="no">No</label>
+                        </div>
+                    </div>
+                    <div class="field-big">
+                        <div>
+                            <p>Kidney Disease</p>
+                            <input type="radio" id="y_kidney" name="kidney_disease" value="yes" required>
+                            <label for="y_kidney" class="yes">Yes</label>
+                            <input type="radio" id="n_kidney" name="kidney_disease" value="no" required>
+                            <label for="n_kidney" class="no">No</label>
+                        </div>
+                        <div>
+                            <p>Skin Cancer</p>
+                            <input type="radio" id="y_skin" name="skin_cancer" value="yes" required>
+                            <label for="y_skin" class="yes">Yes</label>
+                            <input type="radio" id="n_skin" name="skin_cancer" value="no" required>
+                            <label for="n_skin" class="no">No</label>
+                        </div>
+                    </div>
+                    <div class="field-big">
+                        <div>
+                            <p>Physical Activity</p>
+                            <input type="radio" id="y_activity" name="physical_activity" value="yes" required>
+                            <label for="y_activity" class="yes">Yes</label>
+                            <input type="radio" id="n_activity" name="physical_activity" value="no" required>
+                            <label for="n_activity" class="no">No</label>
+                        </div>
+                        <div>
+                            <p>Difficulty in Walking</p>
+                            <input type="radio" id="y_walking" name="difficult_walking" value="yes" required>
+                            <label for="y_walking" class="yes">Yes</label>
+                            <input type="radio" id="n_walking" name="difficult_walking" value="no" required   >
+                            <label for="n_walking" clas="no">No</label>
+                        </div>
+                    </div>            
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" name="pred" value="Submit"> 
+            </div>
+        </form>
+    </div>  
+
+</body>
+    
+    
+    
+    
+    
+</html>

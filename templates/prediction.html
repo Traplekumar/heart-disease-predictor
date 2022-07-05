@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HeartHealthChecker</title>
+    <!-- <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"> -->
+    <link type="text/css" rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="perdiction-whole">
+        <div class="prediction">
+            <div class="prediction-text">
+                <h2>HEART DISEASE RESULT!</h2>
+                {% if predValue == 0%}
+                    <p class="result">SUPERB!!</p>
+                    <p class="result">Your Heart is Healthy.</p>
+                    <div class="advice">
+                        <p>Advice</p>
+                        <ul style="list-style-type:disc;">
+                            <li>Stay Active</li>
+                            <li>Get Good Sleep</li>
+                            <li>Maintain Proper Diet</li>
+                        </ul>
+                    </div>
+                {% endif%}
+                {% if predValue == 1%}
+                    <p class="result">Your Heart is not performing well.</p>
+                    <p class="result">You might need to visit a doctor</p>
+                    <div class="advice">
+                        <p>Advice</p>
+                        <ul style="list-style-type:disc;">
+                            <li>Eat Healthy</li>
+                            <li>Get Active</li>
+                            <li>Manage Stress</li>
+                        </ul>
+                    </div>
+                {% endif%}
+                <div class="prediction-contact">
+                    <p>Connect with me (App Creator)-</p>
+                    <a  href="https://github.com/Traplekumar?tab=repositories" target="_blank"><img src="../static/images/Githhub.png"></a>
+                    <a href="https://www.linkedin.com/in/traple-kumar-07967a196" target="_blank"><img src="../static/images/LinkedIn.png"></a>
+                </div>
+            </div>
+
+            <div class="prediction-img">
+                <img src="../static/images/Prediction_page.png">
+            </div>
+        </div>
+    </div>
+</body>
+</htmlL>
