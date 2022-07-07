@@ -70,10 +70,11 @@ class ValidateDatabaseTrain:
             preTrain.ordinalEncode()
             preTrain.oneHotEncode()
             preTrain.removeOutlier()
-            clusteredData, clusters = preTrain.createClusters()
-            # xtrain, ytrain = preprocessor.getXAndY()
+            xtrain, ytrain= preTrain.getXAndY()
+            x_under, y_under = preTrain.underSample(xtrain, ytrain)
+            
             logging.info("Successfully completed preprocessing of TRAIN data.")
-            return clusteredData, clusters
+            return x_under, y_under
         
         except Exception as e:
             logging.error("Error while preprocessing TRAIN data.\n" + str(e))
@@ -87,9 +88,10 @@ class ValidateDatabaseTrain:
             preTest.binaryEncode()
             preTest.ordinalEncode()
             preTest.oneHotEncodeTest()
-            clusteredData = preTest.createClustersTest()
+            xtest, ytest = preTest.getXAndY()
+
             logging.info("Successfully completed preprocessing of TEST data.")
-            return clusteredData
+            return xtest, ytest
         
         except Exception as e:
             logging.error("Error while preprocessing TEST dataset.\n" + str(e))
@@ -98,51 +100,35 @@ class ValidateDatabaseTrain:
     def train(self):
         logging.info("Started Training model on cluster")
         try:
-            directory = DirHandling()
-            # delecting necessary directories that hold data of Previous Run.
-            directory.deleteDirectories()
-            # creating new necessary directories
-            directory.createDirectories()
-            # for train dataset:
-            self.validate()
-            self.database()
+            # directory = DirHandling()
+            # # delecting necessary directories that hold data of Previous Run.
+            # directory.deleteDirectories()
+            # # creating new necessary directories
+            # directory.createDirectories()
+            # # for train dataset:
+            # self.validate()
+            # self.database()
             
-            df_train, cluster_train = self.preprocessTrain()
-            # for test dataset:
-            df_test = self.preprocessTest()
+            x_under, y_under = self.preprocessTrain()
+            xtest, ytest = self.preprocessTest()
+            
+            trainModel = ModelTraining(x_under, y_under, xtest, ytest)
 
-            for i in range(cluster_train):
-                df_train_cls = df_train[df_train['cluster'] == i]
-                df_test_cls = df_test[df_test['cluster'] == i]
-                
-                preTrain = Preprocessing(df_train_cls)
-                preTest = Preprocessing(df_test_cls)
+            clf_log = trainModel.logisticRegression()
+            clf_ran = trainModel.randomForest()
+            clf_xgb = trainModel.xgboost()
 
-                xtrain, ytrain = preTrain.getXAndY()
-                xtest, ytest = preTest.getXAndY()
+            classifiers = [clf_log, clf_ran, clf_xgb]
+            bestIndex = np.argmax([clf[1] for clf in classifiers])
+            bestModel = classifiers[bestIndex][0]
 
-                xtrain = preTrain.standardizeX(xtrain)
-                xtest = preTest.standardizeXTest(xtest)
-
-                x_under, y_under = preTrain.underSample(xtrain, ytrain)
-                
-                trainModel = ModelTraining(x_under, y_under, xtest, ytest, i)
-
-                clf_log = trainModel.logisticRegression()
-                clf_ran = trainModel.randomForest()
-                clf_xgb = trainModel.xgboost()
-
-                classifiers = [clf_log, clf_ran, clf_xgb]
-                bestIndex = np.argmax([clf[1] for clf in classifiers])
-                bestModel = classifiers[bestIndex][0]
-
-                logging.info(f"CLUSTER {i} \t Logistic Regression Score: {clf_log[1]}, Random Forest Score: {clf_ran[1]}, XGBoost Score: {clf_xgb}")
-                modelName = str(bestModel).split('(')[0] + '_' + str(i) + '.pickle'
-                modelPath = os.path.join(self.modelDir, modelName)
-                with open(modelPath, 'wb') as file:
-                    pickle.dump(bestModel, file)
-                
-                logging.info("Successfully saved: " + str(modelName))
+            logging.info(f"Logistic Regression Score: {clf_log[1]}, Random Forest Score: {clf_ran[1]}, XGBoost Score: {clf_xgb[1]}")
+            modelName = str(bestModel).split('(')[0] + '.pickle'
+            modelPath = os.path.join(self.modelDir, modelName)
+            with open(modelPath, 'wb') as file:
+                pickle.dump(bestModel, file)
+            
+            logging.info("Successfully saved: " + str(modelName))
 
         except Exception as e:
             logging.error("Error while Training models on clusterd data.\n" + str(e))
