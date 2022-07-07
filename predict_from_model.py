@@ -49,33 +49,28 @@ class Predictor:
                 'Yes', 'During_Pregnancy']
 
             feature_df = pd.DataFrame(features, columns=labels)
-            feature_df.drop(['80_more', 'American_Indian', 'Borderline_Diabetes'], axis=1, inplace=True)
+            feature_df.drop(['80_more', 'White', 'No'], axis=1, inplace=True)
             df.drop(['AgeCategory', 'Race', 'Diabetic'], axis=1, inplace=True)
             df = pd.concat([df, feature_df], axis=1)
-
-        ## create Cluster
-        with open('Resources/Kmeans.pickle', 'rb') as file:
-            kmeans = pickle.load(file)
         
-        clusterNumber = kmeans.predict(df)
+        xUser = df
 
         ## Standard Scaler
-        with open("Resources/StandardScaler.pickle", "rb") as file:
-            standardScaler = pickle.load(file)
-        xNew = standardScaler.transform(df)
+        # with open("Resources/StandardScaler.pickle", "rb") as file:
+        #     standardScaler = pickle.load(file)
+        # xNew = standardScaler.transform(df)
 
         ## make prediction
         for model in os.listdir(self.modelDirectory):
-            temp = model.split('.')[0].split('_')[1]
-            if int(temp) == clusterNumber:
-                modelPath = os.path.join(self.modelDirectory, model)
-                with open(modelPath, 'rb') as file:
-                    predModel = pickle.load(file)
-                    prediction = predModel.predict(xNew)
-                    return prediction
+            modelPath = os.path.join(self.modelDirectory, model)
+            print(modelPath)
+            with open(modelPath, 'rb') as file:
+                predModel = pickle.load(file)
+                prediction = predModel.predict(xUser)
+                return prediction
 
 if __name__ == '__main__':
     x = Predictor()
-    values = [16.6,'Yes','No','No',3.0,30.0,'No','Female','55-59','White','Yes','Yes','Very good',5.0,'Yes','No','Yes']
+    values = [32.81,'Yes','No','No',0.0,0.0,'No','Female','60-64','White','No','No','Excellent',8.0,'No','No','No']
 
     print(x.predict(values))
