@@ -10,54 +10,52 @@ import sys
 from logger import logger_config
 
 class ModelTraining:
-    def __init__(self, xtrain, ytrain, xtest, ytest, cluster):
+    def __init__(self, xtrain, ytrain, xtest, ytest):
         self.xtrain = xtrain
         self.ytrain = ytrain
         self.xtest = xtest
         self.ytest = ytest
-        self.cluster = cluster
 
     def logisticRegression(self):
-        logging.info(f"Started training Logistic Regression on cluster => {self.cluster}.")
+        logging.info("Started training Logistic Regression.")
         try:
-            model = LogisticRegression(penalty='none')
+            model = LogisticRegression(penalty='l2', max_iter=5000)
             model.fit(self.xtrain, self.ytrain)
             ypred = model.predict(self.xtest)
-            # print(self.ytest)
             recall = recall_score(self.ytest, ypred)
-            logging.info(f"successfully trained Logistic Regression model on cluster => {self.cluster}.")
+            logging.info(f"successfully trained Logistic Regression.")
             return [model, recall]
 
         except Exception as e:
-            logging.error(f"Error while training Logistic Regression model on cluster => {self.cluster}.\n" + str(e))
+            logging.error(f"Error while training Logistic Regression.\n" + str(e))
             raise e
     
     def randomForest(self):
-        logging.info(f"Started training randomForest model on cluster => {self.cluster}")
+        logging.info("Started training randomForest model.")
         try:
-            model = RandomForestClassifier(criterion='entropy', max_depth=19, min_samples_leaf=3, min_samples_split=9, n_estimators=100)
+            model = RandomForestClassifier(criterion='entropy', max_depth=16, min_samples_leaf=2, min_samples_split=2, n_estimators=200)
             model.fit(self.xtrain, self.ytrain)
             ypred = model.predict(self.xtest)
             recall = recall_score(self.ytest, ypred)
-            logging.info(f"Successfully trained Random Forest on cluster => {self.cluster}")
+            logging.info("Successfully trained Random Forest.")
             return [model, recall]
         
         except Exception as e:
-            logging.error(f"Error while training Random Forest model on cluster => {self.cluster}.\n" + str(e))
+            logging.error(f"Error while training Random Forest model.\n" + str(e))
             raise e
         
     def xgboost(self):
-        logging.info(f"Started training XGBoost on cluster => {self.cluster}")
+        logging.info(f"Started training XGBoost.")
         try:
-            model = XGBClassifier(booster='gblinear', eta=0.019, max_depth=1, n_estimators=10, random_state=23)
+            model = XGBClassifier(booster='gbtree', eta=0.028, max_depth=8, n_estimators=200, random_state=23)
             model.fit(self.xtrain, self.ytrain)
             ypred = model.predict(self.xtest)
             recall = recall_score(self.ytest, ypred)
-            logging.info(f"Successfully trained XGBoost on cluster => {self.cluster}")
+            logging.info(f"Successfully trained XGBoost.")
             return [model, recall]
         
         except Exception as e:
-            logging.error(f"Error while training XGBoost on cluster => {self.cluster}.\n" + str(e))
+            logging.error(f"Error while training XGBoost.\n" + str(e))
             raise e
 
 

@@ -71,7 +71,7 @@ class Preprocessing:
             with open("Resources/OneHotEncoder.pickle", "wb") as file:
                 pickle.dump(enc, file)
             
-            feature_df.drop(['80_more', 'American_Indian', 'Borderline_Diabetes'], axis=1, inplace=True)
+            feature_df.drop(['80_more', 'White', 'No'], axis=1, inplace=True)
             self.data.drop(['AgeCategory', 'Race', 'Diabetic'], axis=1, inplace=True)
             self.data = pd.concat([self.data, feature_df], axis=1)
             logging.info("Successfullly one Hot encoded features.")
@@ -92,11 +92,12 @@ class Preprocessing:
                     'Yes', 'During_Pregnancy']
 
                 feature_df = pd.DataFrame(features, columns=labels)
-                feature_df.drop(['80_more', 'American_Indian', 'Borderline_Diabetes'], axis=1, inplace=True)
+                feature_df.drop(['80_more', 'White', 'No'], axis=1, inplace=True)
                 self.data.drop(['AgeCategory', 'Race', 'Diabetic'], axis=1, inplace=True)
                 self.data = pd.concat([self.data, feature_df], axis=1)
                 logging.info("Successfullly one Hot encoded features.")
-                    
+                # return self.data
+                
         except Exception as e:
             logging.error("Error while one hot encoding Test data.\n" + str(e))
             raise e
@@ -104,43 +105,45 @@ class Preprocessing:
     def removeOutlier(self):
         q = self.data['BMI'].quantile(0.9998)
         self.data = self.data[self.data['BMI'] < q]
-
-    def createClusters(self):
-        CLUSTER = 4
-        temp = self.data.drop('HeartDisease', axis=1)
-
-        kmeans = KMeans(n_clusters=CLUSTER, init='k-means++', random_state=124)
-        clusters = kmeans.fit_predict(temp)
-        with open('Resources/Kmeans.pickle', 'wb') as file:
-            pickle.dump(kmeans, file)
-        
-        clusters = clusters.reshape(-1, 1)
-        self.data['cluster'] = clusters
-        return self.data, CLUSTER
-
-    def createClustersTest(self):
-        CLUSTER = 4
-        try:
-            temp = self.data.drop('HeartDisease', axis=1)
-        except:
-            temp = self.data
-        
-        with open('Resources/Kmeans.pickle', 'rb') as file:
-            kmeans = pickle.load(file)
-        
-        clusters = kmeans.predict(temp)
-        self.data['cluster'] = clusters
         return self.data
+
+    # def createClusters(self):
+    #     CLUSTER = 4
+    #     temp = self.data.drop('HeartDisease', axis=1)
+
+    #     kmeans = KMeans(n_clusters=CLUSTER, init='k-means++', random_state=124)
+    #     clusters = kmeans.fit_predict(temp)
+    #     with open('Resources/Kmeans.pickle', 'wb') as file:
+    #         pickle.dump(kmeans, file)
+        
+    #     clusters = clusters.reshape(-1, 1)
+    #     self.data['cluster'] = clusters
+    #     return self.data, CLUSTER
+
+    # def createClustersTest(self):
+    #     CLUSTER = 4
+    #     try:
+    #         temp = self.data.drop('HeartDisease', axis=1)
+    #     except:
+    #         temp = self.data
+        
+    #     with open('Resources/Kmeans.pickle', 'rb') as file:
+    #         kmeans = pickle.load(file)
+        
+    #     clusters = kmeans.predict(temp)
+    #     self.data['cluster'] = clusters
+    #     return self.data
 
 
     def getXAndY(self):
-        x = self.data.drop(['HeartDisease', 'cluster'], axis=1)
+        x = self.data.drop(['HeartDisease'], axis=1)
         y = self.data['HeartDisease']
+        print(len(x.columns))
         return x, y
 
-    def getX(self, data):
-        x = data.drop('cluster', axis=1)
-        return x
+    # def getX(self, data):
+    #     x = data.drop('cluster', axis=1)
+    #     return x
 
     def standardizeX(self, x):
         sc = StandardScaler()

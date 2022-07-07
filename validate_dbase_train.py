@@ -100,14 +100,14 @@ class ValidateDatabaseTrain:
     def train(self):
         logging.info("Started Training model on cluster")
         try:
-            # directory = DirHandling()
-            # # delecting necessary directories that hold data of Previous Run.
-            # directory.deleteDirectories()
-            # # creating new necessary directories
-            # directory.createDirectories()
-            # # for train dataset:
-            # self.validate()
-            # self.database()
+            directory = DirHandling()
+            # delecting necessary directories that hold data of Previous Run.
+            directory.deleteDirectories()
+            # creating new necessary directories
+            directory.createDirectories()
+            # for train dataset:
+            self.validate()
+            self.database()
             
             x_under, y_under = self.preprocessTrain()
             xtest, ytest = self.preprocessTest()
