@@ -12,7 +12,6 @@ from model_training.model_training import ModelTraining
 import logging
 import sys
 
-# sys.path.append('logger')
 from logger import logger_config
 
 class ValidateDatabaseTrain:
